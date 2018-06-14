@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
   client.query('select * from author', (err, result) => {
     console.log(result.rows)
     res.json({
-      test: 123
+      test: result.rows
     })
     client.end()
   })
