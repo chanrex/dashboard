@@ -1,26 +1,27 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const {
-  Pool,
-  Client
-} = require('pg')
+const { Pool, Client } = require("pg");
 
-const client = new Client()
-client.connect()
-
-
-
+const client = new Client();
+client.connect();
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
-  client.query('select * from author', (err, result) => {
-    console.log(result.rows)
+router.get("/", function(req, res, next) {
+  res.render("index", {
+    title: "Express"
+  });
+});
+
+/* GET Author */
+router.get("/get_author", function(req, res, next) {
+  client.query("select * from author", (err, result) => {
+    console.log(result.rows);
     res.json({
-      test: result.rows
-    })
-    client.end()
-  })
+      authors: result.rows
+    });
+    client.end();
+  });
   /*res.render('index', {
     title: 'Express'
   });*/
