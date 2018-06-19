@@ -17,9 +17,9 @@ router.get("/", function(req, res, next) {
 router.get("/get_author", function(req, res, next) {
   client.query("select * from author", (err, result) => {
     console.log(result.rows);
-    res.json({
-      authors: result.rows
-    });
+
+    var jsonString = JSON.stringify(result.rows);
+    res.send(jsonString);
     client.end();
   });
   /*res.render('index', {
