@@ -28,14 +28,15 @@ router.get("/get_author", function (req, res, next) {
 });
 
 /* Insert Author */
-router.post("/insert_author", function (req, res, next) {
+router.post('/insert_author', function (req, res, next) {
   var anthorName = req.body.authorName;
 
-  mc.query("insert into author (author_name) values ('" + anthorName + "');",
+  client.query("insert into author (author_name) values ('" + anthorName + "');",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
         data: results,
+        anthorName: anthorName,
         message: "New task has been created successfully."
       });
     }
@@ -60,6 +61,7 @@ router.get("/get_books", function (req, res, next) {
     //client.end();
   });
 });
+
 
 /* GET Publisher */
 router.get("/get_publisher", function (req, res, next) {
@@ -92,6 +94,22 @@ router.get("/get_category", function (req, res, next) {
     res.send(jsonString);
     //client.end();
   });
+});
+
+/* Insert category */
+router.post('/insert_category', function (req, res, next) {
+  var categoryName = req.body.categoryName;
+
+  client.query("insert into category (category_name) values ('" + categoryName + "');",
+    function (error, results, fields) {
+      if (error) throw error;
+      return res.send({
+        data: results,
+        categoryName: categoryName,
+        message: "New task has been created successfully."
+      });
+    }
+  );
 });
 
 module.exports = router;
