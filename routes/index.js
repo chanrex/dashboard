@@ -31,11 +31,12 @@ router.get("/get_author", function (req, res, next) {
 router.post("/insert_author", function (req, res, next) {
   var anthorName = req.body.authorName;
 
-  mc.query("insert into author (author_name) values ('" + anthorName + "');",
+  client.query("insert into author (author_name) values ('" + anthorName + "');",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
         data: results,
+        anthorName: anthorName,
         message: "New task has been created successfully."
       });
     }
