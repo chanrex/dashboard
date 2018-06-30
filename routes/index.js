@@ -47,7 +47,7 @@ router.post('/insert_author', function (req, res, next) {
 router.post('/delete_author', function (req, res, next) {
   var authorName = req.body.authorName;
 
-  client.query("update author set status=0 where author_name='" + authorName + "');",
+  client.query("update author set status=0 where author_name='" + authorName + "';",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
@@ -58,7 +58,6 @@ router.post('/delete_author', function (req, res, next) {
     }
   );
 });
-
 
 /* GET Book */
 router.get("/get_books", function (req, res, next) {
@@ -103,7 +102,7 @@ router.post('/insert_publisher', function (req, res, next) {
 router.post('/delete_publisher', function (req, res, next) {
   var publisherName = req.body.publisherName;
 
-  client.query("update publisher set status=0 where company_name='" + publisherName + "');",
+  client.query("update publisher set status=0 where company_name='" + publisherName + "';",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
@@ -156,7 +155,7 @@ router.post('/delete_user', function (req, res, next) {
   var userName = req.body.userName;
   var userPassword = req.body.userPassword;
 
-  client.query("update user set status=0 where user_name='" + userName + "' and user_password='" + userPassword + "');",
+  client.query("update user set status=0 where user_name='" + userName + "' and user_password='" + userPassword + "';",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
@@ -199,7 +198,7 @@ router.post('/insert_category', function (req, res, next) {
 router.post('/delete_category', function (req, res, next) {
   var categoryName = req.body.categoryName;
 
-  client.query("update category set status=0 where category_name='" + categoryName + "');",
+  client.query("update category set status=0 where category_name='" + categoryName + "';",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
