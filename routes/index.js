@@ -18,7 +18,7 @@ router.get("/", function (req, res, next) {
 
 /* GET Author */
 router.get("/get_author", function (req, res, next) {
-  client.query("select * from author", (err, result) => {
+  client.query("select * from author where status='1'", (err, result) => {
     console.log(result.rows);
 
     var jsonString = JSON.stringify(result.rows);
@@ -43,10 +43,26 @@ router.post('/insert_author', function (req, res, next) {
   );
 });
 
+/* Delete Author */
+router.post('/delete_author', function (req, res, next) {
+  var anthorName = req.body.authorName;
+
+  client.query("update author set status=0 where author_name='" + anthorName + "');",
+    function (error, results, fields) {
+      if (error) throw error;
+      return res.send({
+        data: results,
+        anthorName: anthorName,
+        message: "New task has been created successfully."
+      });
+    }
+  );
+});
+
 
 /* GET Book */
 router.get("/get_books", function (req, res, next) {
-  client.query("select * from books", (err, result) => {
+  client.query("select * from books where status='1'", (err, result) => {
     console.log(result.rows);
 
     var jsonString = JSON.stringify(result.rows);
@@ -58,7 +74,7 @@ router.get("/get_books", function (req, res, next) {
 
 /* GET Publisher */
 router.get("/get_publisher", function (req, res, next) {
-  client.query("select * from publisher", (err, result) => {
+  client.query("select * from publisher where status='1'", (err, result) => {
     console.log(result.rows);
 
     var jsonString = JSON.stringify(result.rows);
@@ -83,10 +99,25 @@ router.post('/insert_publisher', function (req, res, next) {
   );
 });
 
+/* Delete Publisher */
+router.post('/delete_publisher', function (req, res, next) {
+  var publisherName = req.body.publisherName;
+
+  client.query("update publisher set status=0 where company_name='" + publisherName + "');",
+    function (error, results, fields) {
+      if (error) throw error;
+      return res.send({
+        data: results,
+        publisherName: publisherName,
+        message: "New task has been created successfully."
+      });
+    }
+  );
+});
 
 /* GET Users */
 router.get("/get_users", function (req, res, next) {
-  client.query("select * from users", (err, result) => {
+  client.query("select * from users where status='1'", (err, result) => {
     console.log(result.rows);
 
     var jsonString = JSON.stringify(result.rows);
@@ -120,9 +151,26 @@ router.post('/insert_user', function (req, res, next) {
   );
 });
 
+/* Delete User */
+router.post('/delete_user', function (req, res, next) {
+  var userName = req.body.userName;
+  var userPassword = req.body.userPassword;
+
+  client.query("update user set status=0 where user_name='" + userName + "' and user_password='" + userPassword + "');",
+    function (error, results, fields) {
+      if (error) throw error;
+      return res.send({
+        data: results,
+        publisherName: publisherName,
+        message: "New task has been created successfully."
+      });
+    }
+  );
+});
+
 /* GET category */
 router.get("/get_category", function (req, res, next) {
-  client.query("select * from category", (err, result) => {
+  client.query("select * from category where status='1'", (err, result) => {
     console.log(result.rows);
 
     var jsonString = JSON.stringify(result.rows);
@@ -141,6 +189,22 @@ router.post('/insert_category', function (req, res, next) {
       return res.send({
         data: results,
         categoryName: categoryName,
+        message: "New task has been created successfully."
+      });
+    }
+  );
+});
+
+/* Delete category */
+router.post('/delete_category', function (req, res, next) {
+  var categoryName = req.body.categoryName;
+
+  client.query("update category set status=0 where category_name='" + categoryName + "');",
+    function (error, results, fields) {
+      if (error) throw error;
+      return res.send({
+        data: results,
+        publisherName: publisherName,
         message: "New task has been created successfully."
       });
     }
