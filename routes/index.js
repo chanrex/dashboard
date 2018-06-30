@@ -47,7 +47,7 @@ router.post('/insert_author', function (req, res, next) {
 router.post('/delete_author', function (req, res, next) {
   var anthorName = req.body.authorName;
 
-  client.query("update author set status=0 where author_name='" + anthorName + "');",
+  client.query("update author set status=0 where author_name='" + anthorName + "';",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
