@@ -29,14 +29,14 @@ router.get("/get_author", function (req, res, next) {
 
 /* Insert Author */
 router.post('/insert_author', function (req, res, next) {
-  var anthorName = req.body.authorName;
+  var authorName = req.body.authorName;
 
-  client.query("insert into author (author_name) values ('" + anthorName + "');",
+  client.query("insert into author (author_name) values ('" + authorName + "');",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
         data: results,
-        anthorName: anthorName,
+        authorName: authorName,
         message: "New task has been created successfully."
       });
     }
@@ -45,14 +45,14 @@ router.post('/insert_author', function (req, res, next) {
 
 /* Delete Author */
 router.post('/delete_author', function (req, res, next) {
-  var anthorName = req.body.authorName;
+  var authorName = req.body.authorName;
 
-  client.query("update author set status=0 where author_name='" + anthorName + "');",
+  client.query("update author set status=0 where author_name='" + authorName + "');",
     function (error, results, fields) {
       if (error) throw error;
       return res.send({
         data: results,
-        anthorName: anthorName,
+        authorName: authorName,
         message: "New task has been created successfully."
       });
     }
