@@ -64,7 +64,7 @@ router.post("/update_author", function(req, res, next) {
   var ID = req.body.ID;
 
   client.query(
-    "update author set author_name='" + authorName + "' where id='" + ID + "';",
+    "update author set author_name='" + authorName + "' where author_id='" + ID + "';",
     function(error, results, fields) {
       if (error) throw error;
       return res.send({
@@ -163,7 +163,7 @@ router.post("/update_book", function(req, res, next) {
       authorID +
       "',publisher_id='" +
       publisherID +
-      "'where id='" +
+      "'where book_id='" +
       ID +
       "';",
     function(error, results, fields) {
@@ -259,14 +259,14 @@ router.post("/update_publisher", function(req, res, next) {
   client.query(
     "update publisher set company_name='" +
       publisherName +
-      "' where id='" +
+      "' where publisher_id='" +
       ID +
       "';",
     function(error, results, fields) {
       if (error) throw error;
       return res.send({
         data: results,
-        authorName: authorName,
+        publisherName: publisherName,
         message: "New task has been created successfully."
       });
     }
@@ -362,7 +362,7 @@ router.post("/update_user", function(req, res, next) {
       phone +
       "',address='" +
       address +
-      "'where id='" +
+      "'where user_id='" +
       ID +
       "';",
     function(error, results, fields) {
@@ -434,7 +434,7 @@ router.post("/update_category", function(req, res, next) {
   client.query(
     "update category set category_name='" +
       categoryName +
-      "' where id='" +
+      "' where category_id='" +
       ID +
       "';",
     function(error, results, fields) {
